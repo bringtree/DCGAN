@@ -15,7 +15,7 @@ class file_operas(object):
     :return: return a List which is filled of all pictures' src
     """
 
-    data = glob(os.path.join(src, '*jpg'))
+    data = glob(os.path.join(src, '*.jpg'))
     return data
 
   def get_image(self, src):
