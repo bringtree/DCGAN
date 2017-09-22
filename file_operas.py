@@ -1,6 +1,8 @@
 from glob import glob
-
 import os
+import numpy
+
+from scipy import misc
 
 
 class file_operas(object):
@@ -16,7 +18,10 @@ class file_operas(object):
 
   def get_image(self, src):
     """
-
-    :param src:
-    :return:
+    read the image, make image from [-255,255] to [-1,1]
+    :param src:the picture resource
+    :return: return a image, shape[64,64,3] between [-1,1]
     """
+
+    return misc.imread(src).astype(numpy.float32) / 127.5 - 1
+
