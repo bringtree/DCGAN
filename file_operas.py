@@ -4,6 +4,8 @@ import numpy
 
 from scipy import misc
 
+from PIL import Image
+
 
 class file_operas(object):
   def load_images_src(self, src):
@@ -25,3 +27,17 @@ class file_operas(object):
 
     return misc.imread(src).astype(numpy.float32) / 127.5 - 1
 
+  def resize(self, input_src, output_src):
+    """
+
+    :param input_src:
+    :param output_src:
+    :return:
+    """
+    for file in glob(input_src):
+      input_file_path, input_file_all_name = os.path.split(file)
+      input_file_name_pre = os.path.splitext(input_file_all_name)
+
+      if (os.path.isdir(output_src) == False):
+        os.mkdir(output_src)
+      Image.open(file).resize((int(64), int(64))).save(output_src + input_file_name_pre + '.jpg')

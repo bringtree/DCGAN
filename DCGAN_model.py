@@ -127,3 +127,5 @@ class DCGAN_model(object):
         conv_5 = tf.sigmoid(conv_5)
 
         return conv_5
+
+
