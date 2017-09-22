@@ -29,9 +29,9 @@ class file_operas(object):
 
   def resize(self, input_src, output_src):
     """
-
-    :param input_src:
-    :param output_src:
+    resize the pictures which is from input_src and put them to the output_src
+    :param input_src: the pictures' src ,like '/Users/huangpeisong/Desktop/project/data/new_P/*jpg'
+    :param output_src: the pictures' src ,like '/Users/huangpeisong/Desktop/project/data/new_P/'
     :return:
     """
     for file in glob(input_src):
