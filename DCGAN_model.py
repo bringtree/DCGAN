@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-def generator_model(self, random_number):
+def generator_model(random_number):
   """
   the generator model, it wants to generator 64 pictures (size:64*64*3).
 
@@ -19,12 +19,12 @@ def generator_model(self, random_number):
 
   with tf.variable_scope('generator_model'):
     with tf.variable_scope('deconvolute_pre_layer'):
-      w = tf.get_variable(name='w', shape=[64, 16384], dtype=tf.float32,
+      w = tf.get_variable(name='w', shape=[100, 16384], dtype=tf.float32,
                           initializer=tf.random_normal_initializer(stddev=0.02))
       b = tf.get_variable(name='b', shape=[16384], dtype=tf.float32,
                           initializer=tf.random_normal_initializer(stddev=0.02))
-      deconv_pre = tf.matmul(w, random_number) + b
-      deconv_pre = tf.reshape(deconv_pre, [64, 4, 4, *1024])
+      deconv_pre = tf.matmul(random_number, w) + b
+      deconv_pre = tf.reshape(deconv_pre, [64, 4, 4, 1024])
       deconv_pre = tf.nn.selu(deconv_pre)
 
     with tf.variable_scope('deconvolute_layer1'):
@@ -66,7 +66,7 @@ def generator_model(self, random_number):
     return deconv4
 
 
-def discriminator(self, image):
+def discriminator(image, reuse=False):
   """
 
   structure:
@@ -81,7 +81,9 @@ def discriminator(self, image):
   :return:the number ,shape [64,64]
   """
 
-  with tf.variable_scope('discriminator'):
+  with tf.variable_scope('discriminator') as scope:
+    if reuse:
+      scope.reuse_variables()
     with tf.variable_scope('convolute_layer1'):
       w1 = tf.get_variable('w1', shape=[5, 5, 3, 64], dtype=tf.float32)
       b1 = tf.get_variable('b1', shape=[64], dtype=tf.float32, initializer=tf.random_normal_initializer(stddev=0.0))
@@ -123,7 +125,7 @@ def discriminator(self, image):
       w5 = tf.get_variable('w5', shape=[8192, 1], dtype=tf.float32,
                            initializer=tf.random_normal_initializer(stddev=0.0))
       b5 = tf.get_variable('b5', shape=[64], dtype=tf.float32, initializer=tf.random_normal_initializer(stddev=0.0))
-      conv_5 = tf.matmul(w5, conv_5) + b5
+      conv_5 = tf.matmul(conv_5, w5) + b5
       conv_5 = tf.sigmoid(conv_5)
 
       return conv_5

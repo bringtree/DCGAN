@@ -7,7 +7,7 @@ from scipy import misc
 from PIL import Image
 
 
-def load_images_src(self, src):
+def load_images_src(src):
   """
   get all pictures' src,must be jpg
   :param src: the pictures' resource
@@ -18,7 +18,7 @@ def load_images_src(self, src):
   return data
 
 
-def get_image(self, src):
+def get_image(src):
   """
   read the image, make image from [-255,255] to [-1,1]
   :param src:the picture resource
@@ -28,7 +28,7 @@ def get_image(self, src):
   return misc.imread(src).astype(numpy.float32) / 127.5 - 1
 
 
-def resize(self, input_src, output_src):
+def resize(input_src, output_src):
   """
   resize the pictures which is from input_src and put them to the output_src
   :param input_src: the pictures' src ,like '/Users/huangpeisong/Desktop/project/data/new_P/*jpg'
