@@ -56,8 +56,9 @@ with tf.Session() as sess:
       sess.run(generator_optimizer,
                feed_dict={model_random_number: random_number})
 
-      d = d_loss.eval({model_real_image_input: batch_image, model_random_number: random_number})
-      g = g_loss.eval({model_random_number: random_number})
       print(time.strftime("%m-%d %H:%M:%S", time.localtime()))
-      print(d)
-      print(g)
+      if (batch_index % 100 == 0):
+        d = d_loss.eval({model_real_image_input: batch_image, model_random_number: random_number})
+        g = g_loss.eval({model_random_number: random_number})
+        print('d_loss:' + d, 'g_loss:' + g)
+
