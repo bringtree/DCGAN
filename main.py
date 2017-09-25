@@ -35,8 +35,8 @@ for var in all_vars:
   if 'discriminator' in var.name:
     discriminator_var.append(var)
 
-discriminator_optimizer = tf.train.AdamOptimizer(0.0002).minimize(d_loss, var_list=discriminator_var)
-generator_optimizer = tf.train.AdamOptimizer(0.0002).minimize(g_loss, var_list=generator_var)
+discriminator_optimizer = tf.train.AdamOptimizer(0.0005).minimize(d_loss, var_list=discriminator_var)
+generator_optimizer = tf.train.AdamOptimizer(0.0002,beta1=0.5).minimize(g_loss, var_list=generator_var)
 saver = tf.train.Saver()
 with tf.Session() as sess:
   sess.run(tf.global_variables_initializer())
