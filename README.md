@@ -2,6 +2,7 @@
 数据结构课设
 
 基于https://github.com/carpedm20/DCGAN-tensorflow 的修改
+tf 版本 是1.4 那个 每晚都会更新的版本
 
 模型挂掉了
 
