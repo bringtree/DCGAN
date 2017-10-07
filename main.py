@@ -7,24 +7,45 @@ import re
 import os
 
 # build model
-model_random_number = tf.placeholder(tf.float32, [64, 100])
+model_random_number = tf.placeholder(tf.float32, [None, 100])
 model_real_image_input = tf.placeholder(tf.float32, [64, 64, 64, 3])
 
+# fake_image = DCGAN.generator_model(model_random_number)
+# d_model_real, real_logic = DCGAN.discriminator(model_real_image_input)
+# # sampler_image = DCGAN.sample_model(model_random_number)
+# d_model_fake, fake_logic = DCGAN.discriminator(fake_image, True)
+
 fake_image = DCGAN.generator_model(model_random_number)
-real_sigmoid = DCGAN.discriminator(model_real_image_input)
-fake_sigmoid = DCGAN.discriminator(fake_image, True)
+d_model_real = DCGAN.discriminator(model_real_image_input)
+d_model_fake = DCGAN.discriminator(fake_image, True)
+
+
+# real_discriminator = tf.reduce_mean(
+#   tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_real, labels=tf.ones_like(d_model_real)))
+#
+# fake_discriminator = tf.reduce_mean(
+#   tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.zeros_like(d_model_fake)))
+#
+# d_loss = real_discriminator + fake_discriminator
+#
+# g_loss = tf.reduce_mean(
+#   tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.ones_like(d_model_fake))
+# )
+
+
 
 real_discriminator = tf.reduce_mean(
-  tf.nn.sigmoid_cross_entropy_with_logits(logits=real_sigmoid, labels=tf.ones_like(real_sigmoid)))
+  tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_real, labels=tf.ones_like(d_model_real)))
 
 fake_discriminator = tf.reduce_mean(
-  tf.nn.sigmoid_cross_entropy_with_logits(logits=fake_sigmoid, labels=tf.zeros_like(fake_sigmoid)))
+  tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.zeros_like(d_model_fake)))
 
 d_loss = real_discriminator + fake_discriminator
 
 g_loss = tf.reduce_mean(
-  tf.nn.sigmoid_cross_entropy_with_logits(logits=fake_sigmoid, labels=tf.ones_like(fake_sigmoid))
+  tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.ones_like(d_model_fake))
 )
+
 
 all_vars = tf.trainable_variables()
 discriminator_var = []
@@ -35,10 +56,12 @@ for var in all_vars:
   if 'discriminator' in var.name:
     discriminator_var.append(var)
 
-discriminator_optimizer = tf.train.AdamOptimizer(0.0002).minimize(d_loss, var_list=discriminator_var)
-generator_optimizer = tf.train.AdamOptimizer(0.0002).minimize(g_loss, var_list=generator_var)
 saver = tf.train.Saver()
+config = tf.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.12
 with tf.Session() as sess:
+  discriminator_optimizer = tf.train.AdamOptimizer(0.0002, beta1=0.5).minimize(d_loss, var_list=discriminator_var)
+  generator_optimizer = tf.train.AdamOptimizer(0.0002, beta1=0.5).minimize(g_loss, var_list=generator_var)
   sess.run(tf.global_variables_initializer())
   data = file_operas.load_images_src('./data/new_p/')
   batch_size = len(data) // 64
@@ -67,6 +90,12 @@ with tf.Session() as sess:
       sess.run(generator_optimizer,
                feed_dict={model_random_number: random_number})
 
+
+
+      d = fake_discriminator.eval({model_random_number: random_number})
+      d2 = real_discriminator.eval({model_real_image_input: batch_image})
+      g = g_loss.eval({model_random_number: random_number})
+      print('d_loss:' + str(d), 'd2_loss:' + str(d2), 'g_loss:' + str(g))
       print(time.strftime("%m-%d %H:%M:%S", time.localtime()))
 
       if (batch_index % 100 == 0):
