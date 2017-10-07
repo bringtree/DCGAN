@@ -19,7 +19,6 @@ fake_image = DCGAN.generator_model(model_random_number)
 d_model_real = DCGAN.discriminator(model_real_image_input)
 d_model_fake = DCGAN.discriminator(fake_image, True)
 
-
 # real_discriminator = tf.reduce_mean(
 #   tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_real, labels=tf.ones_like(d_model_real)))
 #
@@ -45,7 +44,6 @@ d_loss = real_discriminator + fake_discriminator
 g_loss = tf.reduce_mean(
   tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.ones_like(d_model_fake))
 )
-
 
 all_vars = tf.trainable_variables()
 discriminator_var = []
@@ -89,8 +87,6 @@ with tf.Session() as sess:
                feed_dict={model_random_number: random_number})
       sess.run(generator_optimizer,
                feed_dict={model_random_number: random_number})
-
-
 
       d = fake_discriminator.eval({model_random_number: random_number})
       d2 = real_discriminator.eval({model_real_image_input: batch_image})
