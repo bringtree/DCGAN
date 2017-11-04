@@ -69,14 +69,14 @@
 3 geneartor模型 更新2次参数 是因为 学习弱。
 
 4 2张看到能明白卷积计算过程的图 :
-    ![https://github.com/bringtree/DCGAN/blob/master/img/2301760-73e20657157e186f.gif]
-    ![https://github.com/bringtree/DCGAN/blob/master/img/KPyqPOB.gif]
+    ![](https://github.com/bringtree/DCGAN/blob/master/img/2301760-73e20657157e186f.gif)
+    ![](https://github.com/bringtree/DCGAN/blob/master/img/KPyqPOB.gif)
 
 5 反卷积的图: 注意 反卷积并不是说能还原卷积前的结果，他也只是一种计算方法。
-    ![https://github.com/bringtree/DCGAN/blob/master/img/20161017150336392]
+    ![](https://github.com/bringtree/DCGAN/blob/master/img/20161017150336392)
 
 6 模型的图:
-    ![https://github.com/bringtree/DCGAN/blob/master/img/structure_cnn.png]
+    ![](https://github.com/bringtree/DCGAN/blob/master/img/structure_cnn.png)
 
 7 设置多个batch优势:同时并行计算，求均值。
 
