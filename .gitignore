@@ -3,5 +3,7 @@
 __pycache__/
 fake_image/
 icon/
-input/
-output/
+input/train3.tfrecords
+output/model*
+output/checkpoint
+dg.js

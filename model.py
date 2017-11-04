@@ -94,7 +94,7 @@ def discriminator(image, reuse=False):
       b1 = tf.get_variable('b1', shape=[64], dtype=tf.float32, initializer=tf.random_normal_initializer(stddev=0.0))
 
       conv_1 = tf.nn.conv2d(input=image, filter=w1, strides=[1, 2, 2, 1], padding="SAME")
-      conv_1 = tf.reshape(tf.nn.bias_add(conv_1, b1), conv_1.get_shape())
+      # conv_1 = tf.reshape(tf.nn.bias_add(conv_1, b1), conv_1.get_shape())
       conv_1 = tf.contrib.layers.batch_norm(conv_1, decay=0.9, epsilon=1e-5, updates_collections=None,
                                             scale=True, is_training=True)
       conv_1 = tf.maximum(conv_1, conv_1 * 0.2)
@@ -105,7 +105,7 @@ def discriminator(image, reuse=False):
       b2 = tf.get_variable('b2', shape=[128], dtype=tf.float32, initializer=tf.random_normal_initializer(stddev=0.0))
 
       conv_2 = tf.nn.conv2d(input=conv_1, filter=w2, strides=[1, 2, 2, 1], padding="SAME")
-      conv_2 = tf.reshape(tf.nn.bias_add(conv_2, b2), conv_2.get_shape())
+      # conv_2 = tf.reshape(tf.nn.bias_add(conv_2, b2), conv_2.get_shape())
       conv_2 = tf.contrib.layers.batch_norm(conv_2, decay=0.9, epsilon=1e-5, updates_collections=None,
                                             scale=True, is_training=True)
       conv_2 = tf.maximum(conv_2, conv_2 * 0.2)
@@ -115,7 +115,7 @@ def discriminator(image, reuse=False):
                            initializer=tf.truncated_normal_initializer(stddev=0.02))
       b3 = tf.get_variable('b3', shape=[256], dtype=tf.float32, initializer=tf.random_normal_initializer(stddev=0.0))
       conv_3 = tf.nn.conv2d(input=conv_2, filter=w3, strides=[1, 2, 2, 1], padding="SAME")
-      conv_3 = tf.reshape(tf.nn.bias_add(conv_3, b3), conv_3.get_shape())
+      # conv_3 = tf.reshape(tf.nn.bias_add(conv_3, b3), conv_3.get_shape())
       conv_3 = tf.contrib.layers.batch_norm(conv_3, decay=0.9, epsilon=1e-5, updates_collections=None,
                                             scale=True, is_training=True)
       conv_3 = tf.maximum(conv_3, conv_3 * 0.2)
@@ -124,7 +124,7 @@ def discriminator(image, reuse=False):
                            initializer=tf.truncated_normal_initializer(stddev=0.02))
       b4 = tf.get_variable('b4', shape=[512], dtype=tf.float32, initializer=tf.random_normal_initializer(stddev=0.0))
       conv_4 = tf.nn.conv2d(input=conv_3, filter=w4, strides=[1, 2, 2, 1], padding="SAME")
-      conv_4 = tf.reshape(tf.nn.bias_add(conv_4, b4), conv_4.get_shape())
+      # conv_4 = tf.reshape(tf.nn.bias_add(conv_4, b4), conv_4.get_shape())
       conv_4 = tf.contrib.layers.batch_norm(conv_4, decay=0.9, epsilon=1e-5, updates_collections=None,
                                             scale=True, is_training=True)
       conv_4 = tf.maximum(conv_4, conv_4 * 0.2)
