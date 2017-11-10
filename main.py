@@ -37,6 +37,7 @@ def main(_):
   for var in all_vars:
     if 'generator' in var.name:
       generator_var.append(var)
+
     if 'discriminator' in var.name:
       discriminator_var.append(var)
 
