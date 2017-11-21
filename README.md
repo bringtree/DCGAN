@@ -1,4 +1,5 @@
 数据结构课设
+数据读取http://blog.csdn.net/lujiandong1/article/details/53376134
 
 基于https://github.com/carpedm20/DCGAN-tensorflow 的修改
 
@@ -11,8 +12,8 @@
 │   └── train3.tfrecords
 ├── main.py(训练的代码)
 ├── make_records.py(制造数据集的代码)
-├── model.py(模型的代码)
-├── output(模型输出的代码)
+├── model.py(generator模型以及discributor模型的代码)
+├── output(存储训练的模型参数的位置)
 │   ├── checkpoint
 │   ├── model.ckpt-110.data-00000-of-00001
 │   ├── model.ckpt-110.index
@@ -108,7 +109,7 @@ acgan使用优化器是Adam，好处学习率可以自己学习调节，另外�
 
 10 交叉熵:
 
-   描述了 预测值 与 理想值的差距 -plog(p)的累加，也就是在正确值上的p越大 交叉熵也就越低，混乱度低，都聚合在正确值上。
+   描述了 预测值 与 理想值的差距 p真log(p预测)+(1-p)*log(1-p预测)的累加，也就是在正确值上的p越大 交叉熵也就越低，混乱度低，都聚合在正确值上。
    classification error 不能精确描述 ，classification error会一刀切，认为错就是错，对就是对，不能够做到聚合。(也就是在判断一个输出的结果时 0.9的概率是正确的和0.6的概率是对的的时候 在 classification error 看来都是对的，没有区别)
    另外 分类问题，常用one-hot\[one-hot不能用于作决策树，虽然和这个东西无关。。。。\] + cross entropy 组合。
 

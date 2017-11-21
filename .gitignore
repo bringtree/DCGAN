@@ -7,3 +7,4 @@ input/train3.tfrecords
 output/model*
 output/checkpoint
 dg.js
+*.docx

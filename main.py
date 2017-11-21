@@ -65,6 +65,11 @@ def main(_):
         threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
         ckpt = tf.train.get_checkpoint_state(FLAGS.model_dir)
+
+        merged = tf.summary.merge_all()
+        train_writer = tf.summary.FileWriter('./logs',
+                                             sess.graph)
+
         if ckpt and ckpt.model_checkpoint_path:
             start_epoch = int(re.search('(?<=model.ckpt-)\d+', ckpt.model_checkpoint_path).group())
             saver.restore(sess, os.path.join(ckpt.model_checkpoint_path))
