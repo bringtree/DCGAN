@@ -7,25 +7,21 @@
 #### 目录说明
 
 ```
-├── fake_image(存放生成图片的代码)
+├── fake_image(存放生成图片)
 ├── input(数据存放地方)
 │   └── train3.tfrecords
-├── main.py(训练的代码)
-├── make_records.py(制造数据集的代码)
-├── model.py(generator模型以及discributor模型的代码)
 ├── output(存储训练的模型参数的位置)
 │   ├── checkpoint
-│   ├── model.ckpt-110.data-00000-of-00001
-│   ├── model.ckpt-110.index
-│   ├── model.ckpt-110.meta
-│   ├── model.ckpt-230.data-00000-of-00001
-│   ├── model.ckpt-230.index
-│   ├── model.ckpt-230.meta
 │   ├── model.ckpt-300.data-00000-of-00001
 │   ├── model.ckpt-300.index
 │   └── model.ckpt-300.meta
-├── generator.py(根据训练好的模型生成图片的代码)
-└── utils.py(一些用到的工具代码)
+├── main.py(训练的代码)
+├── make_wechat_photo.py(使用训练好的模型生成微信头像的代码)
+├── make_gif.py(将生成图片制作成gif图的代码)
+├── make_records.py(制作数据集的代码)
+├── model.py(generator模型以及discributor模型的代码)
+├── ops_image.py(一些图片操作的代码)
+└── ops_tf_recorder.py(数据集操作的代码)
 ```
 
 #### 模型调参的一些事：

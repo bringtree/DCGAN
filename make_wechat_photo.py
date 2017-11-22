@@ -4,7 +4,7 @@ import re
 import os
 import argparse
 from model import generator
-from utils import save_images
+from ops_image import save_images
 
 
 def main(_):

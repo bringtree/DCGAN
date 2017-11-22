@@ -1,3 +1,5 @@
+""" the architecture of generaotr_model and discributor model """
+
 import tensorflow as tf
 
 
