@@ -8,7 +8,7 @@ from ops_image import save_images
 
 
 def main(_):
-    model_random_number = tf.placeholder(tf.float32, [None, 100])
+    model_random_number = tf.placeholder(tf.float32, [64, 100])
     fake_image = generator(model_random_number)
 
     all_vars = tf.trainable_variables()

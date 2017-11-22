@@ -16,7 +16,7 @@ def main(_):
     ckpt_path = os.path.join(FLAGS.model_dir, "model.ckpt")
 
     # 定义模型的2个输入槽
-    model_random_number = tf.placeholder(tf.float32, [None, 100])
+    model_random_number = tf.placeholder(tf.float32, [64, 100])
     model_real_image_input = tf.placeholder(tf.float32, [64, 64, 64, 3])
 
     # 引入2个模型
