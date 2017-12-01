@@ -1,4 +1,5 @@
-数据结构课设，我还藏了个LSTM的没放出来，等我觉得可以了 就放出来。
+数据结构课设，我还藏了个LSTM的没放出来，等我觉得可以了 就放出来。有做过VAE的可以交流下
+
 数据读取http://blog.csdn.net/lujiandong1/article/details/53376134
 
 基于https://github.com/carpedm20/DCGAN-tensorflow 的修改
