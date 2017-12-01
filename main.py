@@ -22,9 +22,9 @@ def main(_):
     # 引入2个模型
     # 生成假图片
     fake_image = generator(model_random_number)
-    # 判别器对真图片的判断
+    # 判别器对真图片的判断值
     d_model_real = discriminator(model_real_image_input)
-    # 判别器对假图片的判断
+    # 判别器对假图片的判断值
     d_model_fake = discriminator(fake_image, True)
 
     # 定义生成器模型的损失函数以及对抗模型的损失函数
@@ -37,7 +37,7 @@ def main(_):
     # tf.zeros_like(d_model_fake)*log(sigmoid(d_model_fake))
     # + (1-tf.zeros_like(d_model_fake)*log(1-sigmoid(d_model_fake))
     fake_discriminator = tf.reduce_mean(
-        tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.zeros_like(d_model_fake)))
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=d_model_fake, labels=tf.zeros_like(d_model_fake)))
 
     d_loss = real_discriminator + fake_discriminator
     g_loss = tf.reduce_mean(

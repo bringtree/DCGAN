@@ -1,0 +1,36 @@
+
+├── fake_image(存放生成图片)
+├── input(数据存放地方)
+│   └── train3.tfrecords
+├── logs(tensorboard模型目录)
+├── output(存储训练的模型参数的位置)
+│   ├── checkpoint
+│   ├── model.ckpt-300.data-00000-of-00001
+│   ├── model.ckpt-300.index
+│   └── model.ckpt-300.meta
+├── main.py(训练的代码)
+├── make_wechat_photo.py(使用训练好的模型生成微信头像的代码)
+├── make_gif.py(将生成图片制作成gif图的代码)
+├── make_records.py(制作数据集的代码)
+├── model.py(generator模型以及discributor模型的代码)
+├── ops_image.py(一些图片操作的代码)
+└── ops_tf_recorder.py(数据集操作的代码)
+
+
+数据集下载:存放在input目录下
+https://www.jianguoyun.com/p/DdOCfgsQzMG9Bhilmjk (访问密码：dcgan)
+
+模型下载:存放在output目录下
+https://www.jianguoyun.com/p/DeEa0WAQzMG9Bhidmjk (访问密码：dcgan)
+https://www.jianguoyun.com/p/DQP3nkEQzMG9Bhigmjk (访问密码：dcgan)
+https://www.jianguoyun.com/p/DTE_dz0QzMG9Bhiimjk (访问密码：dcgan)
+https://www.jianguoyun.com/p/DXdwcIoQzMG9Bhiamjk (访问密码：dcgan)
+
+运行环境要求  python3
+            tensorflow>=1.3
+            numpy>=1.13.3
+            pillow>=4.3.0
+
+根据已有模型生成头像(确保模型下载和投放正确) python3 make_wechat_photo.py
+训练模型(确认数据集下载和投放正确) python3 main.py
+启动tensorboard ensorboard --logdir='./logs'

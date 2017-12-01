@@ -76,6 +76,7 @@ def discriminator(image, reuse=False):
     convolute_layer5 64*4*4*512 -> 64*8192 --(reshape)-> 64*64
 
     :param image: 64 pictures (size:64*64*3)
+    :param reuse: reuse the model
 
     :return:the number ,shape [64,64]
     """
